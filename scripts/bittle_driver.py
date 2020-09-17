@@ -29,22 +29,17 @@ class Driver:
         rospy.loginfo("Linear Components: [%f, %f, %f]"%(msg.linear.x, msg.linear.y, msg.linear.z))
         rospy.loginfo("Angular Components: [%f, %f, %f]"%(msg.angular.x, msg.angular.y, msg.angular.z))
         
-        #cmd = ''
-        #cmd = cmd.join([msg.linear.x, msg.linear.y, msg.linear.z,msg.angular.x, msg.angular.y, msg.angular.z])
         if msg.linear.x > 0:
             self.wrapper(['kwk',0])
         elif msg.linear.x < 0:
             self.wrapper(['kbk',0])
         elif msg.angular.z > 0:
-            self.wrapper(['kjp',0]) 
+            self.wrapper(['kwkR',0]) 
         elif msg.angular.z < 0:
-            self.wrapper(['kbd',0])
+            self.wrapper(['kwkR',0])
         else:
             self.wrapper(['kbalance',0])              
-        #print(cmd)
-
-        #wrapper([skill_dict[cmd],0])
-
+            
     def run(self):
         rospy.spin()
     
