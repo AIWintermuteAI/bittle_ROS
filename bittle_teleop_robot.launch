@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-  <node pkg="bittle_driver" type="bittle_driver.py" name="main_module" output="screen"> </node>
-  
-</launch>
