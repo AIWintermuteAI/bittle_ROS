@@ -8,7 +8,7 @@ import math
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 
-dir_dict = {1:'kwk', -1:'kbk', 2:'kcrR', 3:'kcrL', 0:'kbalance'}
+dir_dict = {1:'krn', -1:'kbk', 2:'kcrL', 3:'kcrR', 0:'krest'}
 
 class Driver:
 
@@ -24,11 +24,12 @@ class Driver:
         bytesize=serial.EIGHTBITS,
         timeout=1
         )
+        self.wrapper([dir_dict[0],0])
 
     def callback(self, msg):
-        rospy.loginfo("Received a /cmd_vel message!")
-        rospy.loginfo("Linear Components: [%f, %f, %f]"%(msg.linear.x, msg.linear.y, msg.linear.z))
-        rospy.loginfo("Angular Components: [%f, %f, %f]"%(msg.angular.x, msg.angular.y, msg.angular.z))
+#        rospy.loginfo("Received a /cmd_vel message!")
+#        rospy.loginfo("Linear Components: [%f, %f, %f]"%(msg.linear.x, msg.linear.y, msg.linear.z))
+#        rospy.loginfo("Angular Components: [%f, %f, %f]"%(msg.angular.x, msg.angular.y, msg.angular.z))
         
         if msg.linear.x > 0:
             dir = 1
@@ -49,7 +50,7 @@ class Driver:
         rospy.spin()
     
     def wrapper(self, task):  #Structure is [token, var=[], time]
-        print(task)
+#        print(task)
         if len(task)==2:
             self.serialWriteByte([task[0]])
         elif isinstance(task[1][0],int):
@@ -83,7 +84,7 @@ class Driver:
             instrStr = var[0] + '\n'
         else:
             instrStr = token
-        print("!!!!!!! "+instrStr)
+#        print("!!!!!!! "+instrStr)
         self.ser.write(instrStr.encode())
     
 if __name__ == '__main__':

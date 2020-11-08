@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="bittle_driver" type="bittle_driver.py" name="main_module" output="screen"> </node>
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />  
+  <include file="$(find hector_slam_launch)/launch/tutorial.launch" />    
+</launch>
