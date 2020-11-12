@@ -3,5 +3,5 @@
 
   <node pkg="bittle_driver" type="bittle_driver.py" name="main_module" output="screen"> </node>
   <include file="$(find rplidar_ros)/launch/rplidar.launch" />  
-  <include file="$(find hector_slam_launch)/launch/tutorial.launch" />    
+  <include file="$(find bittle_driver)/launch/hector_slam.launch" />    
 </launch>
