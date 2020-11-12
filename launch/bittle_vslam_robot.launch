@@ -2,5 +2,5 @@
 <launch>
 
   <node pkg="bittle_driver" type="bittle_driver.py" name="main_module" output="screen"> </node>
-  <include file="$(find orb_slam2_ros)/launch/webcam_mono.launch" />  
+  <include file="$(find bittle_driver)/launch/webcam_mono.launch" />  
 </launch>

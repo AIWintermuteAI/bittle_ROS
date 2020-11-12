@@ -1,0 +1,31 @@
+<launch>
+    
+    <node pkg="orb_slam2_ros"  type="Mono"  name="orb_slam2_ros" 
+          args="$(find orb_slam2_lib)/Vocabulary/ORBvoc.bin $(find bittle_driver)/settings/webcam_mono.yaml" 
+          cwd="node"   output="screen">
+ 
+          <rosparam command="load" file="$(find orb_slam2_ros)/settings/orb_slam2_param.yaml" />
+    
+    </node>
+
+  <node name="camera" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/video0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="camera" />
+    <param name="io_method" value="mmap"/>
+  </node>
+
+  <node pkg="tf"
+        type="static_transform_publisher"
+        name="link1_broadcaster"
+        args="0 0 0 0 0 0 base_link camera_optical 100" />
+
+  <node pkg="tf"
+        type="static_transform_publisher"
+        name="link2_broadcaster"
+        args="0 0 0 0 0 0 base_link map_odom_interface 100" />
+
+</launch>
+
